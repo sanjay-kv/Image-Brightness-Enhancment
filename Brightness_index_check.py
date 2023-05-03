@@ -15,7 +15,7 @@ def calculate_brightness(image_path):
     return brightness_index
 
 # input directory
-input_dir = 'input'
+input_dir = 'High qa enhanced'
 
 # create Excel workbook and sheet
 wb = openpyxl.Workbook()
@@ -28,6 +28,7 @@ ws.append(["Filename", "Brightness"])
 input_filenames = [f for f in os.listdir(input_dir) if os.path.isfile(os.path.join(input_dir, f))]
 
 # iterate over input images
+brightness_list = []
 for i, filename in enumerate(input_filenames):
     try:
         # calculate brightness
@@ -36,6 +37,9 @@ for i, filename in enumerate(input_filenames):
         # append filename and brightness to Excel sheet
         ws.append([filename, brightness])
         
+        # add brightness to list
+        brightness_list.append(brightness)
+        
         # print filename and brightness
         print("Filename:", filename)
         print("Brightness:", brightness)
@@ -43,6 +47,10 @@ for i, filename in enumerate(input_filenames):
     except:
         # print error message
         print("Error processing file:", filename)
+
+# calculate average brightness threshold value
+avg_brightness = np.mean(brightness_list)
+print("Average brightness threshold value:", avg_brightness)
 
 # save Excel workbook
 wb.save("brightness.xlsx")
