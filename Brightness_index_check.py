@@ -15,7 +15,7 @@ def calculate_brightness(image_path):
     return brightness_index
 
 # input directory
-input_dir = 'High qa enhanced'
+input_dir = 'input'
 
 # create Excel workbook and sheet
 wb = openpyxl.Workbook()
